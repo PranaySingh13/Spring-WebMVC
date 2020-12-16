@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- ****Note**** 
+		 1. formView: it will take form name to get User form.
+		 2. commandName: it will take logical name to the command class.
+		 3. commandClass: It will take fully qualified name of the command class.
+		 4. sessionForm: to keep Command Object in session scope in order to reuse command object.
+	 -->
+	<!--Command Controller -->
+	<bean name="/reg" class="com.gk.controller.RegistrationController">
+		<property name="formView" value="registrationForm"></property>
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="user" />
+		<property name="commandClass" value="com.gk.command.User" />
+	</bean>
+
+	<!-- Handler Mapping -->
+	<bean name="handlerMapping"
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+	<!-- View Resolver -->
+	<bean name="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>
