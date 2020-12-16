@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.AbstractCommandController;
 import com.gk.command.User;
 
 /*
- * Deprecated from spring 4.x version
+ * Deprecated from Spring 4.x version
  */
 public class LoginController extends AbstractCommandController {
 
