@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Config for validation message -->
+	<bean name="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>validation_Messages</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Validator Class -->
+	<bean name="userValidator" class="com.gk.validator.UserValidator"/>
+	
+	<!--Command Controller -->
+	<bean name="/reg" class="com.gk.controller.UserController">
+		<property name="formView" value="registrationForm"/>
+		<property name="validator" ref="userValidator"/>
+		<property name="commandName" value="user" />
+		<property name="commandClass" value="com.gk.command.User" />
+	</bean>
+
+	<!-- Handler Mapping -->
+	<bean name="handlerMapping"
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+	<!-- View Resolver -->
+	<bean name="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>
