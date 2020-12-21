@@ -14,13 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
 
-	/*
-	 * ****Note****
-	 * IF we don't want to Provide validation messages through
-	 * properties file. Provide validation messages directly in
-	 * the Annotation..
-	 */
-	// @NotEmpty(message="User Name is required")
 	@NotEmpty
 	private String uName;
 
