@@ -14,11 +14,8 @@
 	<context:component-scan base-package="com.gk"/>
 	<context:annotation-config/>
 	
-	<!-- Controller Classes -->
-	<bean class="com.gk.controller.WishController" />
-
 	<!-- Handler Mapping -->
-	<bean name="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
 
 	<!-- View Resolver -->
 	<bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
