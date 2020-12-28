@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:component-scan base-package="com.gk" />
+	<context:annotation-config />
+	
+	<!-- I18N Config -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		
+		<!-- Mention the Bundle Name of properties file present in resources folder in value attribute -->
+		<property name="basename" value="messages"/>
+		<!-- ****Note**** -->
+		<!-- 1. UTF-8 is Unicode Transformation Format for all Language Support, 8 denotes bit.
+			 2. Change the CharSet and Page Encoding in taglibs of JSPs from ISO-8859-1 to UTF-8 for all Language Support.
+			 3. No need to change the properties of project and JSPs from ISO-8859-1 to UTF-8. -->
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+		
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+	
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
+	</bean>
+		
+	<!-- Handler Mapping -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="localeChangeInterceptor"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- View Resolver -->
+	<bean name="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>
